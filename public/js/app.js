@@ -36714,6 +36714,17 @@ if (token) {
 
 $(document).ready(function () {
   $('#cpf').mask('000.000.000-00');
+  $('#valor').mask('000.000.000.000.000,00', {
+    reverse: true
+  }); // $('#contribuicao').mask('000.000.000.000.000,00', {reverse: true});
+
+  var valor = document.querySelector("#valor");
+  var contribuicao = document.querySelector('#contribuicao');
+  $("#valor").on("keyup", function () {
+    var total = valor.value / 3;
+    console.log(total);
+    contribuicao.value = total;
+  });
 });
 
 /***/ }),

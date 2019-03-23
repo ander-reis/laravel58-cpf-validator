@@ -21,4 +21,17 @@
 
 $(document).ready(function () {
     $('#cpf').mask('000.000.000-00');
+    $('#valor').mask('000.000.000.000.000,00', {reverse: true});
+    // $('#contribuicao').mask('000.000.000.000.000,00', {reverse: true});
+
+
+    const valor = document.querySelector("#valor");
+    const contribuicao = document.querySelector('#contribuicao');
+
+    $("#valor").on("keyup", function(){
+        const total = valor.value / 3;
+
+        console.log(total);
+        contribuicao.value = total;
+    })
 });
