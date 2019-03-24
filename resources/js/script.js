@@ -25,13 +25,25 @@ $(document).ready(function () {
     // $('#contribuicao').mask('000.000.000.000.000,00', {reverse: true});
 
 
-    const valor = document.querySelector("#valor");
-    const contribuicao = document.querySelector('#contribuicao');
+    // const valor = document.querySelector("#valor");
+    // const contribuicao = document.querySelector('#contribuicao');
+
+    function moedaParaNumero(valor)
+    {
+        return isNaN(valor) == false ? parseFloat(valor) :   parseFloat(valor.replace("R$","").replace(".","").replace(",","."));
+    }
+
+    //http://blog.fmansano.com/javascript/converter-numero-para-moeda-e-vice-versa/
 
     $("#valor").on("keyup", function(){
-        const total = valor.value / 3;
+        let valor = $("#valor").val();
+        // let contribuicao = $('#contribuicao').val();
 
-        console.log(total);
-        contribuicao.value = total;
+        let valor1 = valor.toString().replace(",", "")
+        const total = Math.floor(valor1/3);
+
+
+        console.log(total.toFixed(2));
+        $('#contribuicao').val(total);
     })
 });

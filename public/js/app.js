@@ -36717,13 +36717,21 @@ $(document).ready(function () {
   $('#valor').mask('000.000.000.000.000,00', {
     reverse: true
   }); // $('#contribuicao').mask('000.000.000.000.000,00', {reverse: true});
+  // const valor = document.querySelector("#valor");
+  // const contribuicao = document.querySelector('#contribuicao');
 
-  var valor = document.querySelector("#valor");
-  var contribuicao = document.querySelector('#contribuicao');
+  function moedaParaNumero(valor) {
+    return isNaN(valor) == false ? parseFloat(valor) : parseFloat(valor.replace("R$", "").replace(".", "").replace(",", "."));
+  } //http://blog.fmansano.com/javascript/converter-numero-para-moeda-e-vice-versa/
+
+
   $("#valor").on("keyup", function () {
-    var total = valor.value / 3;
-    console.log(total);
-    contribuicao.value = total;
+    var valor = $("#valor").val(); // let contribuicao = $('#contribuicao').val();
+
+    var valor1 = valor.toString().replace(",", "");
+    var total = Math.floor(valor1 / 3);
+    console.log(total.toFixed(2));
+    $('#contribuicao').val(total);
   });
 });
 
