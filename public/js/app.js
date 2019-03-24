@@ -36714,24 +36714,35 @@ if (token) {
 
 $(document).ready(function () {
   $('#cpf').mask('000.000.000-00');
-  $('#valor').mask('000.000.000.000.000,00', {
+  $('#valor').mask('000.000,00', {
     reverse: true
-  }); // $('#contribuicao').mask('000.000.000.000.000,00', {reverse: true});
-  // const valor = document.querySelector("#valor");
+  });
+  $('#contribuicao').mask('#.##0,00', {
+    reverse: true
+  }); // const valor = document.querySelector("#valor");
   // const contribuicao = document.querySelector('#contribuicao');
 
   function moedaParaNumero(valor) {
     return isNaN(valor) == false ? parseFloat(valor) : parseFloat(valor.replace("R$", "").replace(".", "").replace(",", "."));
+  }
+
+  function numeroParaMoeda(n, c, d, t) {
+    c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
   } //http://blog.fmansano.com/javascript/converter-numero-para-moeda-e-vice-versa/
 
 
   $("#valor").on("keyup", function () {
     var valor = $("#valor").val(); // let contribuicao = $('#contribuicao').val();
 
-    var valor1 = valor.toString().replace(",", "");
+    var valor1 = valor.toString().replace(",", "").replace('.', '');
     var total = Math.floor(valor1 / 3);
-    console.log(total.toFixed(2));
-    $('#contribuicao').val(total);
+    console.log(numeroParaMoeda(total, 0, '', ',')); // $('#contribuicao').val(total);
+
+    $('#contribuicao').val(total.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }));
   });
 });
 
