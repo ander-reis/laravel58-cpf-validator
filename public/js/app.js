@@ -36735,11 +36735,11 @@ $(document).ready(function () {
   $("#valor").on("keyup", function () {
     var valor = $("#valor").val(); // let contribuicao = $('#contribuicao').val();
 
-    var valor1 = valor.toString().replace(",", "").replace('.', '');
-    var total = Math.floor(valor1 / 3);
-    console.log(numeroParaMoeda(total, 0, '', ',')); // $('#contribuicao').val(total);
+    var valor1 = valor.replace(",", "").replace('.', '');
+    var total = Math.floor(valor1 / 30);
+    console.log(total / 100); // $('#contribuicao').val(total/100);
 
-    $('#contribuicao').val(total.toLocaleString('pt-BR', {
+    $('#contribuicao').val((total / 100).toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL'
     }));

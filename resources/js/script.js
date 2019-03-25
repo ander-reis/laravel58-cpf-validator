@@ -47,13 +47,13 @@ $(document).ready(function () {
         let valor = $("#valor").val();
         // let contribuicao = $('#contribuicao').val();
 
-        let valor1 = valor.toString().replace(",", "").replace('.', '');
+        let valor1 = valor.replace(",", "").replace('.', '');
 
-        const total = Math.floor(valor1/3);
+        const total = Math.floor(valor1/30);
 
-        console.log(numeroParaMoeda(total, 0, '', ','));
+        console.log(total/100);
 
-        // $('#contribuicao').val(total);
-        $('#contribuicao').val(total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+        // $('#contribuicao').val(total/100);
+        $('#contribuicao').val((total/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
     })
 });
