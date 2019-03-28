@@ -36706,11 +36706,37 @@ if (token) {
           event.stopPropagation();
         }
 
+        var valor = $('#vl_salario').val();
+        var virgula = valor.split(',');
+        var salario = virgula[0].replace('.', '');
+        console.log(salario);
+
+        if (salario < 300) {
+          //     console.log('erro');
+          //
+          $("#validate").html("Valor do Salário deve ser maior que R$ 300,00");
+          $(".form-control").addClass("invalid");
+          $(".form-control").addClass("is-invalid");
+          $("#validate").addClass("error");
+          $("#vl_salario").addClass("error-text");
+          event.preventDefault();
+          event.stopPropagation();
+          form.classList.add('was-invalidated');
+        } else {
+          //     console.log('certo');
+          $("#validate").removeClass("error");
+          $(".form-control").removeClass("is-invalid");
+          form.classList.add('was-validated');
+          $("#vl_salario").removeClass("error-text");
+          $("#validate").html("Certo!");
+        }
+
         form.classList.add('was-validated');
       }, false);
     });
   }, false);
-})();
+})(); // ^([0–9]|1[0-9]|2[0–9]|3[0-9]|4[0-9])
+
 
 $(document).ready(function () {
   $('#cpf').mask('000.000.000-00');
