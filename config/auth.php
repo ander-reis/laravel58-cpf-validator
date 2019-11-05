@@ -75,6 +75,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'custom-user' => [
+            'driver' => 'custom-user',
+            'model' => \App\User::class,
+        ]
     ],
 
     /*
@@ -98,6 +103,11 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+        'custom' => [
+            'provider' => 'custom-user',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ]
     ],
 
 ];
